@@ -6,6 +6,7 @@ public class KotakMaker {
     public KotakMaker(int nomor) {
         this.nomor = nomor;
     }
+
     public String kotakValidator() {
         if (nomor <= 2) {
             return "Nilai terlalu kecil.";

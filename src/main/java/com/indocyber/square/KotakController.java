@@ -8,19 +8,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/api")
 public class KotakController {
 
-    @GetMapping
+    @PostMapping
     @ResponseBody
     public ResponseEntity<String> buatKotak(@RequestBody int nomor) {
         KotakMaker kotakMaker = new KotakMaker(nomor);
-        String kotakSummary = "Square : " + kotakMaker.kotakValidator();
+        String kotakFlat = kotakMaker.kotakValidator();
+        String kotakSummary = "Square: " + kotakFlat;
 
-//        String[] kotakFlatArray = kotakMaker.kotakValidator().split("(?<=\\G.{" + nomor + "})");
-//        String kotakReal = "";
-//
-//        for (String piece : kotakFlatArray) {
-//            kotakReal = kotakReal + piece + "\n";
-//        }
-//        kotakSummary = kotakSummary + "\n" + kotakReal;
+        String[] kotakFlatArray = kotakFlat.split("(?<=\\G.{" + nomor + "})");
+        String kotakReal = "";
+
+        for (String piece : kotakFlatArray) {
+            kotakReal = kotakReal + piece + "\n";
+        }
+        kotakSummary = kotakSummary + "\n\n" + kotakReal;
 
         return new ResponseEntity<>(kotakSummary, HttpStatus.OK);
     }
